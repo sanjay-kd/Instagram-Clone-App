@@ -7,24 +7,107 @@ class HomeSectionView extends StatefulWidget {
 
 class _HomeSectionViewState extends State<HomeSectionView> {
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            child: StoriesSection(),
-            color: Color(0xFFF5F5F5),
-          ),
-          Container(
-            child: PostSection(),
-            color: Colors.white,
-          ),
-        ],
+  Widget _buildPostUI(BuildContext context, int index){
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      child: Card(
+        margin: const EdgeInsets.all(0.0),
+        elevation: 0.0,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Image.asset("assets/icons/user_status_icon.png",scale: 4,),
+                        SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text("sanjayk15", style: TextStyle(fontWeight: FontWeight.w700, fontFamily: "Ace"),),
+                            SizedBox(height: 3,),
+                            Text("Milan, Italy", style: TextStyle(fontSize: 12),)
+                          ],
+                        )
+                      ],
+                    ),
+                    Icon(Icons.dehaze, color: Colors.grey,)
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.width*0.8,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/post_image.jpg"),
+                    fit: BoxFit.cover
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(Icons.favorite_border, color: Colors.black, size: 32,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.insert_emoticon, color: Colors.black, size: 32,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.language, color: Colors.black, size: 32,),
+                    ],
+                  ),
+                  Icon(Icons.bookmark_border, color: Colors.black, size: 32,),
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Liked by leeviahq and 59 others", style: TextStyle(fontSize: 11),),
+                  Text("sanjay15k : Here comes the status...", style: TextStyle(fontSize: 13),)
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Container(
+          child: StoriesSection(),
+          color: Color(0xFFF5F5F5),
+        ),
+        Container(
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            itemBuilder: _buildPostUI,
+            itemCount: 3,
+          ),
+          color: Colors.white,
+        ),
+
+      ],
+    );
+  }
+
 }
 
 class StoriesSection extends StatefulWidget {
@@ -157,106 +240,6 @@ class _StoriesSectionState extends State<StoriesSection> {
             ],
           ),
         ),
-    );
-  }
-}
-
-class PostSection extends StatefulWidget {
-  @override
-  _PostSectionState createState() => _PostSectionState();
-}
-
-class _PostSectionState extends State<PostSection> {
-
-  Widget _PostUI(BuildContext context){
-    return Container(
-      child: Card(
-        margin: const EdgeInsets.all(0.0),
-        elevation: 0.0,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Image.asset("assets/icons/user_status_icon.png",scale: 4,),
-                        SizedBox(width: 10,),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text("sanjayk15", style: TextStyle(fontWeight: FontWeight.w700, fontFamily: "Ace"),),
-                            SizedBox(height: 3,),
-                            Text("Milan, Italy", style: TextStyle(fontSize: 12),)
-                          ],
-                        )
-                      ],
-                    ),
-                    Icon(Icons.dehaze, color: Colors.grey,)
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.width*0.8,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/post_image.jpg"),
-                  fit: BoxFit.cover
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Icon(Icons.favorite_border, color: Colors.black, size: 32,),
-                      SizedBox(width: 10,),
-                      Icon(Icons.insert_emoticon, color: Colors.black, size: 32,),
-                      SizedBox(width: 10,),
-                      Icon(Icons.language, color: Colors.black, size: 32,),
-                    ],
-                  ),
-                  Icon(Icons.bookmark_border, color: Colors.black, size: 32,),
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("Liked by leeviahq and 59 others", style: TextStyle(fontSize: 13),),
-                  Text("sanjay15k : Here comes the status...", style: TextStyle(fontSize: 15),)
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          _PostUI(context),
-
-        ],
-      ),
-      color: Colors.black,
     );
   }
 }
