@@ -29,7 +29,7 @@ class TopSection extends StatefulWidget {
 
 class _TopSectionState extends State<TopSection> {
 
-  int _currentIndex = 2;
+  int _currentIndex = 0;
 
   void _setIndex(int index){
     setState(() {
@@ -64,10 +64,10 @@ class _TopSectionState extends State<TopSection> {
         ],
       ),
       body: _setPageView(),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: Theme(data: ThemeData(canvasColor: Color(0xFFEEEEEE),), child: BottomNavigationBar(
         currentIndex: _currentIndex,
         iconSize: 30,
-        fixedColor: Colors.black,
+        fixedColor: Color(0xFF212121),
         type: BottomNavigationBarType.fixed,
         onTap: _setIndex,
         items: <BottomNavigationBarItem>[
@@ -103,6 +103,7 @@ class _TopSectionState extends State<TopSection> {
           ),
         ],
       ),
+      )
     );
   }
 }
