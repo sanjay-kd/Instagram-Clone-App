@@ -6,14 +6,21 @@ class HomeSectionView extends StatefulWidget {
 }
 
 class _HomeSectionViewState extends State<HomeSectionView> {
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          StoriesSection(),
-          PostSection(),
+          Container(
+            child: StoriesSection(),
+            color: Color(0xFFF5F5F5),
+          ),
+          Container(
+            child: PostSection(),
+            color: Colors.white,
+          ),
         ],
       ),
     );
@@ -107,7 +114,6 @@ class _StoriesSectionState extends State<StoriesSection> {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-        color: Colors.red,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 7, 0, 4),
           child: Column(
@@ -167,7 +173,6 @@ class _PostSectionState extends State<PostSection> {
       child: Card(
         margin: const EdgeInsets.all(0.0),
         elevation: 0.0,
-        color: Colors.lightGreen,
         child: Column(
           children: <Widget>[
             Padding(
@@ -190,18 +195,49 @@ class _PostSectionState extends State<PostSection> {
                         )
                       ],
                     ),
-                    Icon(Icons.dehaze, color: Colors.white,)
+                    Icon(Icons.dehaze, color: Colors.grey,)
                   ],
                 ),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height*0.4,
+              height: MediaQuery.of(context).size.width*0.8,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/images/post_image.jpg"),
                   fit: BoxFit.cover
                 ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(Icons.favorite_border, color: Colors.black, size: 32,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.insert_emoticon, color: Colors.black, size: 32,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.language, color: Colors.black, size: 32,),
+                    ],
+                  ),
+                  Icon(Icons.bookmark_border, color: Colors.black, size: 32,),
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Liked by leeviahq and 59 others", style: TextStyle(fontSize: 13),),
+                  Text("sanjay15k : Here comes the status...", style: TextStyle(fontSize: 15),)
+                ],
               ),
             )
           ],
